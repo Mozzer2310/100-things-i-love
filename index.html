@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Switcher</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffd1dc;
+        }
+        #text {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #a83279;
+        }
+        button {
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            border: none;
+            background-color: #ffb6c1;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        button:hover {
+            background-color: #ff69b4;
+        }
+    </style>
+</head>
+<body>
+    <div id="text">Loading...</div>
+    <button onclick="nextText()">Next</button>
+
+    <script>
+        let texts = [];
+        let index = 0;
+
+        async function loadTexts() {
+            try {
+                const response = await fetch('data/100-things-i-love.txt');
+                const data = await response.text();
+                texts = data.split('\n').filter(line => line.trim() !== '');
+                document.getElementById("text").textContent = texts.length > 0 ? texts[0] : "No texts available";
+            } catch (error) {
+                console.error("Error loading text file:", error);
+                document.getElementById("text").textContent = "Failed to load texts";
+            }
+        }
+
+        function nextText() {
+            if (texts.length === 0) return;
+            index = (index + 1) % texts.length;
+            document.getElementById("text").textContent = texts[index];
+        }
+
+        loadTexts();
+    </script>
+</body>
+</html>
