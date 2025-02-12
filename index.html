@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Switcher</title>
+    <title>100 Things I Love About You</title>
     <style>
         body {
             display: flex;
@@ -14,6 +14,15 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #ffd1dc;
+            position: relative;
+        }
+        #header {
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            color: #a83279;
         }
         #text {
             font-size: 3rem;
@@ -29,6 +38,8 @@
             color: white;
             cursor: pointer;
             border-radius: 10px;
+            position: fixed;
+            bottom: 20px;
         }
         button:hover {
             background-color: #ff69b4;
@@ -36,6 +47,7 @@
     </style>
 </head>
 <body>
+    <div id="header">Hi Jade, here are 100 things I love about you!</div>
     <div id="text">Loading...</div>
     <button onclick="nextText()">Next</button>
 
@@ -58,7 +70,7 @@
         function nextText() {
             if (texts.length === 0) return;
             index = (index + 1) % texts.length;
-            document.getElementById("text").textContent = texts[index];
+            document.getElementById("text").textContent = "I love "+ texts[index];
         }
 
         loadTexts();
