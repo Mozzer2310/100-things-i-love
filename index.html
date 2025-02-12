@@ -20,7 +20,8 @@
             font-size: 4rem;
             font-weight: bold;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 0;
+            padding-top: 20px;
             margin-bottom: 40px;
             color: #a83279;
         }
@@ -60,7 +61,7 @@
                 const response = await fetch('data/100-things-i-love.txt');
                 const data = await response.text();
                 texts = data.split('\n').filter(line => line.trim() !== '');
-                document.getElementById("text").textContent = texts.length > 0 ? texts[0] : "No texts available";
+                document.getElementById("text").textContent = (index + 1) + ". I love "+ texts[0];
             } catch (error) {
                 console.error("Error loading text file:", error);
                 document.getElementById("text").textContent = "Failed to load texts";
@@ -70,7 +71,7 @@
         function nextText() {
             if (texts.length === 0) return;
             index = (index + 1) % texts.length;
-            document.getElementById("text").textContent = "I love "+ texts[index];
+            document.getElementById("text").textContent = (index + 1) + ". I love "+ texts[index];
         }
 
         loadTexts();
